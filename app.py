@@ -41,6 +41,6 @@ def get_video(filename):
     return send_from_directory(DOWNLOAD_FOLDER, filename)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))  # Tente uma porta maior
+    port = int(os.environ.get("PORT", 5000))  # Padrão da Render
     app.run(host="0.0.0.0", port=port)
 
