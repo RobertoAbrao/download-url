@@ -10,6 +10,9 @@ DOWNLOAD_FOLDER = "videos"
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 
 def download_video(url):
+    if not os.path.exists(DOWNLOAD_FOLDER):
+        os.makedirs(DOWNLOAD_FOLDER)
+
     ydl_opts = {
         'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
         'format': 'best',
@@ -19,8 +22,10 @@ def download_video(url):
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=True)
             filename = ydl.prepare_filename(info)
+            print("Vídeo salvo em:", filename)  # Verifique nos logs se o arquivo foi baixado
         return os.path.basename(filename)
     except Exception as e:
+        print("Erro ao baixar vídeo:", str(e))
         return None
 
 @app.route("/download", methods=["POST"])
