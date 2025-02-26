@@ -20,7 +20,8 @@
             axios.post("https://video-downloader.onrender.com/download", { url })
                 .then(response => {
                     document.getElementById("status").innerHTML = 
-                        `<a href="http://localhost:5000/videos/${response.data.file}" download>Baixar Vídeo</a>`;
+                        `<a href="https://video-downloader.onrender.com/videos/${response.data.file}" download>Baixar Vídeo</a>`;
+
                 })
                 .catch(error => {
                     document.getElementById("status").innerText = "Erro ao baixar.";
