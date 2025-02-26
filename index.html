@@ -17,14 +17,13 @@
             const url = document.getElementById("url").value;
             document.getElementById("status").innerText = "Baixando...";
 
-            axios.post("https://video-downloader.onrender.com/download", { url })
-                .then(response => {
-                    document.getElementById("status").innerHTML = 
-                        `<a href="https://video-downloader.onrender.com/videos/${response.data.file}" download>Baixar Vídeo</a>`;
-
-                })
-                .catch(error => {
-                    document.getElementById("status").innerText = "Erro ao baixar.";
+            axios.post("https://video-downloader-vllg.onrender.com/download", { url })
+        .then(response => {
+            document.getElementById("status").innerHTML = 
+                `<a href="https://video-downloader-vllg.onrender.com/videos/${response.data.file}" download>Baixar Vídeo</a>`;
+        })
+        .catch(error => {
+            document.getElementById("status").innerText = "Erro ao baixar.";
                 });
         }
     </script>
