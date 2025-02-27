@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware de segurança - Configurando Content Security Policy (CSP)
 app.use(helmet({
