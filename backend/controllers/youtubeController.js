@@ -1,4 +1,5 @@
 const { exec } = require('child_process');
+const path = require('path');
 
 exports.downloadVideo = (req, res) => {
     const videoUrl = req.query.url;
@@ -9,8 +10,11 @@ exports.downloadVideo = (req, res) => {
 
     console.log("Recebendo requisição para baixar:", videoUrl);
 
-    // Comando para baixar o vídeo com cookies do navegador
-    const command = `/usr/local/bin/yt-dlp --cookies-from-browser chrome -f "bv*+ba/b" --merge-output-format mp4 -g ${videoUrl}`;
+    // Caminho do arquivo de cookies
+    const cookieFilePath = path.join(__dirname, '../../backend/youtube_cookies.txt');
+
+    // Comando para baixar o vídeo com autenticação
+    const command = `/usr/local/bin/yt-dlp --cookies ${cookieFilePath} -f "bv*+ba/b" --merge-output-format mp4 -g ${videoUrl}`;
     console.log("Executando comando:", command);
 
     exec(command, (error, stdout, stderr) => {
