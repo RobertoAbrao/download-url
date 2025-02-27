@@ -3,25 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baixar Vídeos</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Download de Vídeos</title>
+    
+    <!-- Adicionando Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Baixar Vídeos do YouTube, Instagram e TikTok</h1>
-    
-    <input type="text" id="videoUrl" placeholder="Cole o link do vídeo aqui">
-    <select id="platform">
-        <option value="youtube">YouTube</option>
-        <option value="instagram">Instagram</option>
-        <option value="tiktok">TikTok</option>
-    </select>
-    <button onclick="downloadVideo()">Baixar</button>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Baixar Vídeos do YouTube, Instagram e TikTok</h1>
 
-    <p id="downloadLink"></p>
+        <div class="card shadow-sm p-4">
+            <div class="mb-3">
+                <label for="videoUrl" class="form-label">Cole a URL do vídeo:</label>
+                <input type="text" class="form-control" id="videoUrl" placeholder="https://www.youtube.com/watch?v=xxxxx">
+            </div>
 
-    
-<script src="/script.js" defer></script>
+            <div class="mb-3">
+                <label for="platform" class="form-label">Escolha a plataforma:</label>
+                <select class="form-select" id="platform">
+                    <option value="youtube">YouTube</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="tiktok">TikTok</option>
+                </select>
+            </div>
 
+            <button id="downloadButton" class="btn btn-primary w-100">Baixar Vídeo</button>
+
+            <!-- Indicador de progresso -->
+            <div class="progress mt-3" style="height: 25px; display: none;">
+                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                     role="progressbar" style="width: 0%">Baixando...</div>
+            </div>
+
+            <!-- Link de download -->
+            <div id="downloadLink" class="mt-3 text-center"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
