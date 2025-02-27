@@ -12,7 +12,7 @@ WORKDIR /app
 # Copiar arquivos do projeto
 COPY package.json package-lock.json ./
 COPY backend ./backend
-COPY frontend ../frontend
+
 
 # Instalar dependências do Node.js
 RUN npm install
