@@ -1,22 +1,27 @@
-# Usando uma imagem oficial do Node.js com suporte a ffmpeg
-FROM jrottenberg/ffmpeg:4.4-ubuntu
+# Usar uma imagem do Node.js com suporte ao FFmpeg
+FROM node:18-bullseye
 
-# Instalando dependências
-RUN apt-get update && apt-get install -y wget curl \
+# Atualizar pacotes e instalar FFmpeg e yt-dlp
+RUN apt-get update && apt-get install -y wget ffmpeg \
     && wget -O /usr/local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp \
     && chmod a+rx /usr/local/bin/yt-dlp
 
-# Criando diretório de trabalho
+# Criar diretório de trabalho no container
 WORKDIR /app
 
-# Copiando os arquivos do projeto para o container
-COPY . .
+# Copiar arquivos do projeto
+COPY package.json package-lock.json ./
+COPY backend ./backend
+COPY frontend ./frontend
 
-# Instalando dependências do Node.js
+# Instalar dependências do Node.js
 RUN npm install
 
-# Definir porta que o Render usará
+# Definir a porta usada pelo Render
 ENV PORT=10000
 
-# Iniciar servidor
-CMD ["node", "server.js"]
+# Expõe a porta correta
+EXPOSE 10000
+
+# Comando para iniciar o servidor
+CMD ["node", "backend/server.js"]
