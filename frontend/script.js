@@ -17,7 +17,7 @@ function downloadVideo() {
     progress.style.width = "10%";
     progress.innerText = "Preparando...";
 
-    fetch(`http://localhost:3000/${platform}/download?url=${encodeURIComponent(videoUrl)}`)
+    fetch(`https://download-url.onrender.com/${platform}/download?url=${encodeURIComponent(videoUrl)}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Erro ao baixar o vídeo.");
