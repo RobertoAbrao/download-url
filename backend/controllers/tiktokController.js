@@ -14,7 +14,7 @@ exports.downloadVideo = (req, res) => {
     const outputFilePath = path.join(__dirname, '../../downloads/tiktok_video.mp4');
 
     // Comando para baixar o vídeo diretamente
-    const command = `yt-dlp -f "bv*+ba/b" --merge-output-format mp4 -o "${outputFilePath}" ${videoUrl}`;
+    const command = `/usr/local/bin/yt-dlp -f "bv*+ba/b" --merge-output-format mp4 -o "${outputFilePath}" ${videoUrl}`;
     console.log("Executando comando:", command);
 
     exec(command, (error, stdout, stderr) => {

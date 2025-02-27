@@ -10,7 +10,7 @@ exports.downloadVideo = (req, res) => {
 
     console.log("Recebendo requisição para baixar:", videoUrl);
 
-    const command = `"C:\\Users\\beto-\\OneDrive\\Desktop\\PROJETO DOWNLOAD YOUTUBE\\backend\\yt-dlp.exe" -g ${videoUrl}`;
+    const command = `/usr/local/bin/yt-dlp -g ${videoUrl}`;
     console.log("Executando comando:", command);
 
     exec(command, (error, stdout, stderr) => {

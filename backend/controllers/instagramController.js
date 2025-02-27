@@ -15,10 +15,10 @@ exports.downloadVideo = (req, res) => {
     const outputFilePath = path.join(__dirname, '../../downloads/instagram_%(id)s.%(ext)s');
 
     // Caminho do arquivo de cookies
-    const cookieFilePath = path.join(__dirname, '../../backend/instagram_cookies.txt');
+    const cookieFilePath = path.join(__dirname, '/tmp/instagram_cookies.txt');
 
     // Comando para baixar o vídeo com cookies
-    const command = `yt-dlp --cookies "${cookieFilePath}" -f "bv*+ba/b" --merge-output-format mp4 -o "${outputFilePath}" ${videoUrl}`;
+    const command = `/usr/local/bin/yt-dlp --cookies "${cookieFilePath}" -f "bv*+ba/b" --merge-output-format mp4 -o "${outputFilePath}" ${videoUrl}`;
     console.log("Executando comando:", command);
 
     exec(command, (error, stdout, stderr) => {
