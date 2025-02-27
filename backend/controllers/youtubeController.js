@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const request = require('request');
+const path = require('path');
 
 exports.downloadVideo = (req, res) => {
     const videoUrl = req.query.url;
@@ -10,7 +10,11 @@ exports.downloadVideo = (req, res) => {
 
     console.log("Recebendo requisição para baixar:", videoUrl);
 
-    const command = `/usr/local/bin/yt-dlp -g ${videoUrl}`;
+    // Caminho do arquivo de cookies
+    const cookieFilePath = path.join(__dirname, '../../backend/youtube_cookies.txt');
+
+    // Comando para baixar o vídeo com autenticação
+    const command = `/usr/local/bin/yt-dlp --cookies ${cookieFilePath} -f "bv*+ba/b" --merge-output-format mp4 -g ${videoUrl}`;
     console.log("Executando comando:", command);
 
     exec(command, (error, stdout, stderr) => {
@@ -22,10 +26,6 @@ exports.downloadVideo = (req, res) => {
         const videoDirectUrl = stdout.trim();
         console.log("URL direta do vídeo:", videoDirectUrl);
 
-        // Força o navegador a baixar o vídeo
-        res.setHeader("Content-Disposition", 'attachment; filename="video.mp4"');
-        res.setHeader("Content-Type", "video/mp4");
-
-        request(videoDirectUrl).pipe(res);
+        res.json({ downloadUrl: videoDirectUrl });
     });
 };
